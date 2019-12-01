@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   server:
     build: ./server
@@ -6,10 +6,12 @@ services:
       - "8000:8000"
     volumes:
       - ./server/app:/app
+    command: python manage.py runserver 0.0.0.0:8000
  
   client:
     build: ./client
     ports:
-      - "8000:8000"
-    volumes:
-      - ./client/app:/app
+      - "8080:8080"
+    ## volumes:
+    ##  - ./client/app:/app
+    

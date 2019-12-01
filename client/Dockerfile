@@ -1,7 +1,6 @@
 FROM node:lts-alpine
 
 # устанавливаем простой HTTP-сервер для статики
-RUN npm install -g @vue/cli
 RUN npm install -g http-server
 
 # Папка приложения
@@ -9,17 +8,15 @@ RUN npm install -g http-server
 #RUN mkdir -p ${APP_DIR}
 #WORKDIR ${APP_DIR}
 
-# копируем оба 'package.json' и 'package-lock.json' (если есть)
-COPY app/package*.json ./app/
-COPY app/src ./app/src/
-COPY app/public ./app/public/
-COPY app/babel.config.js ./app/
 # делаем каталог 'app' текущим рабочим каталогом
 WORKDIR /app
+
+COPY ./app/package*.json ./
+
 # устанавливаем зависимости проекта
 RUN npm install
 
-RUN ls
+COPY ./app .
 
 # собираем приложение для production с минификацией
 RUN npm run build
