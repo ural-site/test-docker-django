@@ -7,3 +7,9 @@ services:
     volumes:
       - ./server/app:/app
  
+  client:
+    build: ./client
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./client/app:/app
